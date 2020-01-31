@@ -68,8 +68,7 @@
 			sr.characteristics = ruinconfig[ruinname]["characteristics"]
 
 		//Check if the file exists
-		var/map_directory = "dynamic_maps/"
-		if(!fexists("[map_directory][sr.file_name]"))
+		if(!fexists("[sr.file_name]"))
 			admin_notice("<span class='danger'>Map file [sr.file_name] for ruin [sr.name] does not exist.</span>")
 			log_ss("atlas","Map file [sr.file_name] for ruin [sr.name] does not exist.")
 			continue
@@ -95,8 +94,7 @@
 
 	if(!selected_ruin)
 		return
-	var/map_directory = "dynamic_maps/"
-	var/mfile = "[map_directory][selected_ruin.file_name]"
+	var/mfile = "[selected_ruin.file_name]"
 	var/time = world.time
 
 	if (!maploader.load_map(file(mfile), 0, 0, no_changeturf = TRUE))
