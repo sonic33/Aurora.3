@@ -16,10 +16,8 @@
 	current_map.finalize_load()
 	log_ss("map_finalization", "Finalized map in [(world.time - time)/10] seconds.")
 
-	//Select ruin and spawn it
-	if(current_map.has_space_ruins)
-		select_ruin()
-		load_space_ruin()
+	select_ruin()
+	load_space_ruin()
 
 	if(config.dungeon_chance > 0)
 		place_dungeon_spawns()
@@ -54,7 +52,7 @@
 	try
 		ruinconfig = json_decode(return_file_text("config/space_ruins.json"))
 	catch(var/exception/ej)
-		log_debug("SSatlas: Warning: Could not load space ruin config, as space_ruins.json is missing - [ej]")
+		log_debug("SSfinalize: Warning: Could not load space ruin config - [ej]")
 		return
 
 	for(var/ruinname in ruinconfig)
@@ -71,11 +69,14 @@
 		if(!fexists("[sr.file_name]"))
 			admin_notice("<span class='danger'>Map file [sr.file_name] for ruin [sr.name] does not exist.</span>")
 			log_ss("atlas","Map file [sr.file_name] for ruin [sr.name] does not exist.")
+			log_debug("SSfinalize: File list in /: [json_encode(flist("/"))]")
+			log_debug("SSfinalize: File list in dynamic_maps/: [json_encode(flist("dynamic_maps/"))]")
 			continue
 
 		//Build the lists
 		if(length(sr.valid_maps))
 			if(!(current_map.name in sr.valid_maps))
+				log_debug("SSfinalize: [current_map.name] is not a valid map for [sr.name]")
 				continue
 		ruinlist[sr.name] = sr
 		weightedlist[sr.name] = sr.weight
@@ -90,10 +91,11 @@
 	return
 
 /datum/controller/subsystem/finalize/proc/load_space_ruin()
-	maploader = new
-
 	if(!selected_ruin)
 		return
+
+	maploader = new
+
 	var/mfile = "[selected_ruin.file_name]"
 	var/time = world.time
 
