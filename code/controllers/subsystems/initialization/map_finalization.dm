@@ -14,7 +14,7 @@
 
 	var/time = world.time
 	current_map.finalize_load()
-	log_ss("map_finalization", "Finalized map in [(world.time - time)/10] seconds.")
+	log_ss("finalize", "Finalized map in [(world.time - time)/10] seconds.")
 
 	select_ruin()
 	load_space_ruin()
@@ -25,7 +25,7 @@
 	if(config.generate_asteroid)
 		time = world.time
 		current_map.generate_asteroid()
-		log_ss("map_finalization", "Generated asteroid in [(world.time - time)/10] seconds.")
+		log_ss("finalize", "Generated asteroid in [(world.time - time)/10] seconds.")
 
 	// Generate the area list.
 	resort_all_areas()
@@ -49,6 +49,7 @@
 	var/list/ruinconfig = list()
 	var/list/ruinlist = list()
 	var/list/weightedlist = list()
+	log_debug("SSfinalize: Starting Ruin Selection")
 	try
 		ruinconfig = json_decode(return_file_text("config/space_ruins.json"))
 	catch(var/exception/ej)
@@ -56,6 +57,7 @@
 		return
 
 	for(var/ruinname in ruinconfig)
+		log_debug("SSfinalize: Loading ruin: [ruinname]")
 		//Create the datums
 		var/datum/space_ruin/sr = new(ruinname,ruinconfig[ruinname]["file_name"])
 		if("weight" in ruinconfig[ruinname])
@@ -68,10 +70,12 @@
 		//Check if the file exists
 		if(!fexists("[sr.file_name]"))
 			admin_notice("<span class='danger'>Map file [sr.file_name] for ruin [sr.name] does not exist.</span>")
-			log_ss("atlas","Map file [sr.file_name] for ruin [sr.name] does not exist.")
+			log_ss("finalize","Map file [sr.file_name] for ruin [sr.name] does not exist.")
 			log_debug("SSfinalize: File list in /: [json_encode(flist("/"))]")
+			log_debug("SSfinalize: File list in : [json_encode(flist(""))]")
 			log_debug("SSfinalize: File list in dynamic_maps/: [json_encode(flist("dynamic_maps/"))]")
 			continue
+		log_debug("SSfinalize: Map file [sr.file_name] for ruin [sr.name] is present")
 
 		//Build the lists
 		if(length(sr.valid_maps))
@@ -82,12 +86,13 @@
 		weightedlist[sr.name] = sr.weight
 
 	if(!length(ruinlist))
-		log_ss("atlas","Found no valid ruins for current map.")
+		log_ss("finalize","Found no valid ruins for current map.")
 		return
 
-	log_ss("atlas", "Loaded ruin config.")
+	log_ss("finalize", "Loaded ruin config.")
 	var/ruinname = pickweight(weightedlist)
 	selected_ruin = ruinlist[ruinname]
+	log_debug("SSfinalize: Selected ruin: [selected_ruin.name]")
 	return
 
 /datum/controller/subsystem/finalize/proc/load_space_ruin()
@@ -98,6 +103,8 @@
 
 	var/mfile = "[selected_ruin.file_name]"
 	var/time = world.time
+
+	log_debug("Attempting to load ruin [selected_ruin.name] with file: [mfile]")
 
 	if (!maploader.load_map(file(mfile), 0, 0, no_changeturf = TRUE))
 		log_ss("finalize", "Failed to load '[mfile]'!")
@@ -115,12 +122,12 @@
 
 	var/dungeon_chance = config.dungeon_chance
 
-	log_ss("map_finalization","Attempting to create asteroid dungeons for [length(asteroid_spawn)] different areas, with [length(files) - 1] possible dungeons, with a [dungeon_chance]% chance to spawn a dungeon per area.")
+	log_ss("finalize","Attempting to create asteroid dungeons for [length(asteroid_spawn)] different areas, with [length(files) - 1] possible dungeons, with a [dungeon_chance]% chance to spawn a dungeon per area.")
 
 	for(var/turf/spawn_location in asteroid_spawn)
 
 		if(length(files) <= 0) //Sanity
-			log_ss("map_finalization","There aren't enough dungeon map files to fill the entire dungeon map. There may be less dungeons than expected.")
+			log_ss("finalize","There aren't enough dungeon map files to fill the entire dungeon map. There may be less dungeons than expected.")
 			break
 
 		if(prob(dungeon_chance))
@@ -129,22 +136,22 @@
 
 			if(!dd_hassuffix(chosen_dungeon,".dmm")) //Don't read anything that isn't a map file
 				files -= chosen_dungeon
-				log_ss("map_finalization","ALERT: [chosen_dungeon] is not a .dmm file! Skipping!")
+				log_ss("finalize","ALERT: [chosen_dungeon] is not a .dmm file! Skipping!")
 				continue
 
 			var/map_file = file("[map_directory][chosen_dungeon]")
 
 			if(isfile(map_file)) //Sanity
-				log_ss("map_finalization","Loading dungeon '[chosen_dungeon]' at coordinates [spawn_location.x], [spawn_location.y], [spawn_location.z].")
+				log_ss("finalize","Loading dungeon '[chosen_dungeon]' at coordinates [spawn_location.x], [spawn_location.y], [spawn_location.z].")
 				maploader.load_map(map_file,spawn_location.x,spawn_location.y,spawn_location.z)
 				dungeons_placed += 1
 			else
-				log_ss("map_finalization","ERROR: Something weird happened with the file: [chosen_dungeon].")
+				log_ss("finalize","ERROR: Something weird happened with the file: [chosen_dungeon].")
 
 			if(dd_hassuffix(chosen_dungeon,"_unique.dmm")) //Unique dungeons should only spawn once.
 				files -= chosen_dungeon
 
-	log_ss("map_finalization","Loaded [dungeons_placed] asteroid dungeons in [(world.time - start_time)/10] seconds.")
+	log_ss("finalize","Loaded [dungeons_placed] asteroid dungeons in [(world.time - start_time)/10] seconds.")
 
 	qdel(maploader)
 
