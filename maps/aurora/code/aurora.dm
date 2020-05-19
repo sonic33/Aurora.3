@@ -23,8 +23,8 @@
 		"9" = /turf/space
 	)
 
-	station_name = "NSS Aurora"
-	station_short = "Aurora"
+	station_name = "NSS Tranquility"
+	station_short = "Tranquility"
 	dock_name = "NTCC Odin"
 	dock_short = "Odin"
 	boss_name = "Central Command"
