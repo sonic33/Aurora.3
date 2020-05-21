@@ -1,7 +1,7 @@
 /datum/species/unathi
-	name = "Unathi"
-	short_name = "una"
-	name_plural = "Unathi"
+	name = "Lizardman"
+	short_name = "Lizard"
+	name_plural = "Lizardmen"
 	bodytype = "Unathi"
 	icobase = 'icons/mob/human_races/unathi/r_lizard.dmi'
 	deform = 'icons/mob/human_races/unathi/r_def_lizard.dmi'
@@ -18,11 +18,11 @@
 	darksight = 3
 	gluttonous = GLUT_MESSY
 	stomach_capacity = 7
-	slowdown = 0.5
+	slowdown = -1
 
-	brute_mod = 0.8
-	fall_mod = 1.2
-	grab_mod = 1.25 // Huge, usually have horns
+	brute_mod = 0.7
+	fall_mod = 1.35
+	grab_mod = 1.45 // Huge, usually have horns
 	resist_mod = 2.5 // Arguably our strongest organic species
 
 	ethanol_resistance = 0.4
@@ -33,7 +33,7 @@
 	secondary_langs = list(LANGUAGE_UNATHI, LANGUAGE_AZAZIBA)
 	name_language = LANGUAGE_UNATHI
 
-	stamina	=	120			  // Unathi have the shortest but fastest sprint of all
+	stamina = 120 // Unathi have the shortest but fastest sprint of all
 	stamina_recovery = 5
 
 	sprint_cost_factor = 1.45

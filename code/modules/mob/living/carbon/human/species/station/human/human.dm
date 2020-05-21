@@ -34,7 +34,7 @@
 	sprint_cost_factor = 0.5
 
 	grab_mod = 1.25 //humans are wily fuckers - geeves
-	climb_coeff = 1
+	climb_coeff = 1 //humans are so god damn average combat stat wise.
 
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/tie_hair)

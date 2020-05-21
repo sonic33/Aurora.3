@@ -24,6 +24,8 @@
 	name_language = LANGUAGE_SKRELLIAN
 	rarity_value = 3
 
+	bleed_mod = 0.8 //Slow Metabolism.
+	metabolism_mod = 0.7 //Slow Metabolism.
 	grab_mod = 2
 	resist_mod = 0.5 // LIKE BABBY
 
