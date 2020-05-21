@@ -1,7 +1,7 @@
 /datum/species/tajaran
-	name = "Tajara"
-	short_name = "taj"
-	name_plural = "Tajara"
+	name = "Beastman"
+	short_name = "Beast"
+	name_plural = "Beastmen"
 	bodytype = "Tajara"
 	icobase = 'icons/mob/human_races/tajara/r_tajaran.dmi'
 	deform = 'icons/mob/human_races/tajara/r_def_tajaran.dmi'
@@ -15,24 +15,33 @@
 		/datum/unarmed_attack/bite/sharp
 	)
 	darksight = 8
-	slowdown = -1
+	flash_mod = 1.4 // Beastmen eyes
+	slowdown = -0.75 // Conserve energy before sprinting.
 
-	brute_mod = 1.2
-	fall_mod = 0.5
+	brute_mod = 0.9 // Thick fur.
+	burn_mod = 1.25 // Flammable fur.
+	toxins_mod = 1.35 // Non-adaptive stomach.
+	damage_multiplier = 1.1 // Claws.
+	fall_mod = 0.8 // Agile
+	exhaust_threshold = 55
+
+	metabolism_mod = 1.2 // Predator.
+	climb_coeff = 1.15 // Claws.
+	heat_discomfort_level = 305 // Thick Fur
 
 	grab_mod = 1.25 // Fur easy to cling onto
 
 	num_alternate_languages = 2
 	secondary_langs = list(LANGUAGE_SIIK_MAAS, LANGUAGE_SIIK_TAJR, LANGUAGE_YA_SSA)
 	name_language = LANGUAGE_SIIK_MAAS
-	ethanol_resistance = 0.8//Gets drunk a little faster
+	ethanol_resistance = 0.55 // Non-adaptive stomach.
 	rarity_value = 2
-	economic_modifier = 7
+	economic_modifier = 5
 
-	stamina = 90	// Tajara evolved to maintain a steady pace in the snow, sprinting wastes energy
-	stamina_recovery = 4
-	sprint_speed_factor = 0.65
-	sprint_cost_factor = 0.75
+	stamina = 150	// Beastmen evolved to use bursts of speed to catch their prey.
+	stamina_recovery = 3
+	sprint_speed_factor = 1.1
+	sprint_cost_factor = 1
 
 	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Adhomai in the S'rendarr \
 	system. They have been brought up into the space age by the Humans and Skrell, who alledgedly influenced their \
