@@ -11,17 +11,19 @@
 	unarmed_types = list(
 		/datum/unarmed_attack/stomp,
 		/datum/unarmed_attack/kick,
-		/datum/unarmed_attack/claws,
-		/datum/unarmed_attack/bite/sharp
+		/datum/unarmed_attack/beastmanclaws,
+		/datum/unarmed_attack/bite/beastmansharp
+	)
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/feralbite
 	)
 	darksight = 8
 	flash_mod = 1.4 // Beastmen eyes
-	slowdown = -0.75 // Conserve energy before sprinting.
+	slowdown = 0.75 // Conserve energy before sprinting.
 
 	brute_mod = 0.9 // Thick fur.
 	burn_mod = 1.25 // Flammable fur.
 	toxins_mod = 1.35 // Non-adaptive stomach.
-	damage_multiplier = 1.1 // Claws.
 	fall_mod = 0.8 // Agile
 	exhaust_threshold = 55
 

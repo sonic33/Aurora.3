@@ -22,6 +22,9 @@
 		/datum/unarmed_attack/punch/ipc,
 		/datum/unarmed_attack/stomp/ipc,
 		/datum/unarmed_attack/kick/ipc)
+	inherent_verbs = list(
+		/mob/living/carbon/human/proc/crush
+	)
 	rarity_value = 2
 
 	inherent_eye_protection = FLASH_PROTECTION_MAJOR

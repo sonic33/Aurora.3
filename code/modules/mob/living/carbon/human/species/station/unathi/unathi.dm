@@ -12,7 +12,7 @@
 		/datum/unarmed_attack/stomp,
 		/datum/unarmed_attack/kick,
 		/datum/unarmed_attack/claws,
-		/datum/unarmed_attack/bite/sharp
+		/datum/unarmed_attack/bite/snakebite
 	)
 	primitive_form = "Stok"
 	darksight = 3
@@ -62,7 +62,8 @@
 	heat_level_3 = 1100 //Default 1000
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/tongue_flick
+		/mob/living/carbon/human/proc/tongue_flick,
+		/mob/living/carbon/human/proc/snakebite
 	)
 
 

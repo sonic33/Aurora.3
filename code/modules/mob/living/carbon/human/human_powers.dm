@@ -382,6 +382,110 @@ mob/living/carbon/human/proc/change_monitor()
 	playsound(get_turf(src), 'sound/weapons/slash.ogg', 50, TRUE)
 	last_special = world.time + 100
 
+/mob/living/carbon/human/proc/snakebite()
+	set category = "Abilities"
+	set name = "Bite"
+	set desc = "While grabbing someone aggressively, tear into them with your fangs."
+
+	if(last_special > world.time)
+		to_chat(src, SPAN_WARNING("Your fangs still ache!"))
+		return
+
+	if(use_check_and_message(usr))
+		return
+
+	if(wear_mask?.flags_inv & HIDEFACE)
+		to_chat(src, SPAN_WARNING("You have a mask covering your mouth."))
+		return
+
+	if(head?.flags_inv & HIDEFACE)
+		to_chat(src, SPAN_WARNING("You have something on your head covering your mouth!"))
+		return
+
+	var/obj/item/grab/G = locate() in src
+	if(!G || !istype(G))
+		to_chat(src, SPAN_WARNING("You are not grabbing anyone."))
+		return
+
+	if(G.state < GRAB_KILL)
+		to_chat(src, SPAN_WARNING("You must have a strangling grip to bite someone!"))
+		return
+
+	if(ishuman(G.affecting))
+		var/mob/living/carbon/human/H = G.affecting
+		var/hit_zone = zone_sel.selecting
+		var/obj/item/organ/external/affected = H.get_organ(hit_zone)
+
+		if(!affected || affected.is_stump())
+			to_chat(H, SPAN_WARNING("They are missing that limb!"))
+			return
+
+		H.apply_damage(12, BRUTE, hit_zone, damage_flags = DAM_SHARP|DAM_EDGE)
+		H.apply_damage(13, TOX, hit_zone, damage_flags = DAM_SHARP|DAM_EDGE)
+		visible_message(SPAN_WARNING("<b>\The [src]</b> rips viciously at \the [G.affecting]'s [affected] with its fangs!"))
+		msg_admin_attack("[key_name_admin(src)] grabbite'd [key_name_admin(H)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)",ckey=key_name(src),ckey_target=key_name(H))
+	else
+		var/mob/living/M = G.affecting
+		if(!istype(M))
+			return
+		M.apply_damage(12, BRUTE, damage_flags = DAM_SHARP|DAM_EDGE)
+		M.apply_damage(13, TOX, damage_flags = DAM_SHARP|DAM_EDGE)
+		visible_message(SPAN_WARNING("<b>\The [src]</b> rips viciously at \the [G.affecting]'s flesh with its fangs!"))
+		msg_admin_attack("[key_name_admin(src)] grabbite'd [key_name_admin(M)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)",ckey=key_name(src),ckey_target=key_name(M))
+	playsound(get_turf(src), 'sound/weapons/slash.ogg', 50, TRUE)
+	last_special = world.time + 100
+
+/mob/living/carbon/human/proc/feralbite()
+	set category = "Abilities"
+	set name = "Bite"
+	set desc = "While grabbing someone aggressively, tear into them with your jaws."
+
+	if(last_special > world.time)
+		to_chat(src, SPAN_WARNING("Your jaws still ache!"))
+		return
+
+	if(use_check_and_message(usr))
+		return
+
+	if(wear_mask?.flags_inv & HIDEFACE)
+		to_chat(src, SPAN_WARNING("You have a mask covering your mouth."))
+		return
+
+	if(head?.flags_inv & HIDEFACE)
+		to_chat(src, SPAN_WARNING("You have something on your head covering your mouth!"))
+		return
+
+	var/obj/item/grab/G = locate() in src
+	if(!G || !istype(G))
+		to_chat(src, SPAN_WARNING("You are not grabbing anyone."))
+		return
+
+	if(G.state < GRAB_KILL)
+		to_chat(src, SPAN_WARNING("You must have a strangling grip to bite someone!"))
+		return
+
+	if(ishuman(G.affecting))
+		var/mob/living/carbon/human/H = G.affecting
+		var/hit_zone = zone_sel.selecting
+		var/obj/item/organ/external/affected = H.get_organ(hit_zone)
+
+		if(!affected || affected.is_stump())
+			to_chat(H, SPAN_WARNING("They are missing that limb!"))
+			return
+
+		H.apply_damage(25, BRUTE, hit_zone, damage_flags = DAM_SHARP|DAM_EDGE)
+		visible_message(SPAN_WARNING("<b>\The [src]</b> rips viciously at \the [G.affecting]'s [affected] with its jaws!"))
+		msg_admin_attack("[key_name_admin(src)] grabbite'd [key_name_admin(H)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)",ckey=key_name(src),ckey_target=key_name(H))
+	else
+		var/mob/living/M = G.affecting
+		if(!istype(M))
+			return
+		M.apply_damage(25, BRUTE, damage_flags = DAM_SHARP|DAM_EDGE)
+		visible_message(SPAN_WARNING("<b>\The [src]</b> rips viciously at \the [G.affecting]'s flesh with its jaws!"))
+		msg_admin_attack("[key_name_admin(src)] grabbite'd [key_name_admin(M)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)",ckey=key_name(src),ckey_target=key_name(M))
+	playsound(get_turf(src), 'sound/weapons/slash.ogg', 50, TRUE)
+	last_special = world.time + 100
+
 /mob/living/carbon/human/proc/detonate_flechettes()
 	set category = "Military Frame"
 	set name = "Detonate Flechettes"
@@ -574,11 +678,11 @@ mob/living/carbon/human/proc/change_monitor()
 		to_chat(src, "You cannot launch a quill in your current state.")
 		return
 
-	last_special = world.time + 30
+	last_special = world.time + 60
 
 	visible_message("<span class='warning'><b>\The [src]</b> launches a spine-quill at [target]!</span>")
 
-	src.apply_damage(10,BRUTE)
+	src.apply_damage(15,BRUTE)
 	playsound(src.loc, 'sound/weapons/bladeslice.ogg', 50, 1)
 	var/obj/item/arrow/quill/A = new /obj/item/arrow/quill(usr.loc)
 	A.throw_at(target, 10, 30, usr)
@@ -1226,4 +1330,47 @@ mob/living/carbon/human/proc/change_monitor()
 		visible_message("<span class='warning'><b>\The [src]</b> viciously crushes [G.affecting]'s flesh with its metallic arms!</span>")
 		msg_admin_attack("[key_name_admin(src)] crushed [key_name_admin(M)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)",ckey=key_name(src),ckey_target=key_name(M))
 	playsound(src.loc, 'sound/weapons/heavysmash.ogg', 50, 1)
+	last_special = world.time + 100
+
+/mob/living/carbon/human/proc/dionacrush()
+	set category = "Abilities"
+	set name = "Crush"
+	set desc = "While grabbing someone in a neck grab, crush them with your vines."
+
+	if(last_special > world.time)
+		to_chat(src, "<span class='warning'>Your tentacles are still recovering!</span>")
+		return
+
+	if(use_check_and_message(usr))
+		return
+
+	var/obj/item/grab/G = src.get_active_hand()
+	if(!istype(G))
+		to_chat(src, "<span class='warning'>You are not grabbing anyone.</span>")
+		return
+
+	if(G.state < GRAB_NECK)
+		to_chat(src, "<span class='warning'>You must have a stronger grab to crush your prey!</span>")
+		return
+
+	if(ishuman(G.affecting))
+		var/mob/living/carbon/human/H = G.affecting
+		var/hit_zone = zone_sel.selecting
+		var/obj/item/organ/external/affected = H.get_organ(hit_zone)
+
+		if(!affected || affected.is_stump())
+			to_chat(H, "<span class='danger'>They are missing that limb!</span>")
+			return
+
+		H.apply_damage(40, BRUTE, hit_zone)
+		visible_message("<span class='warning'><b>\The [src]</b> viciously crushes [affected] of [G.affecting] with its viney tentacles!</span>")
+		msg_admin_attack("[key_name_admin(src)] crushed [key_name_admin(H)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)",ckey=key_name(src),ckey_target=key_name(H))
+	else
+		var/mob/living/M = G.affecting
+		if(!istype(M))
+			return
+		M.apply_damage(40,BRUTE)
+		visible_message("<span class='warning'><b>\The [src]</b> viciously crushes [G.affecting]'s flesh with its viney tentacles!</span>")
+		msg_admin_attack("[key_name_admin(src)] crushed [key_name_admin(M)] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[src.x];Y=[src.y];Z=[src.z]'>JMP</a>)",ckey=key_name(src),ckey_target=key_name(M))
+	playsound(src.loc, 'sound/weapons/pierce.ogg', 50, 1)
 	last_special = world.time + 100

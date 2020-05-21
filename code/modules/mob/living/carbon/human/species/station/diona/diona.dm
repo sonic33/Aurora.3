@@ -19,10 +19,11 @@
 	)
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/consume_nutrition_from_air,
-		/mob/living/carbon/human/proc/create_structure
+		/mob/living/carbon/human/proc/create_structure,
+		/mob/living/carbon/human/proc/dionacrush
 	)
 	//primitive_form = "Nymph"
-	slowdown = 7
+	slowdown = 2
 	rarity_value = 4
 	hud_type = /datum/hud_data/diona
 	siemens_coefficient = 0.3
@@ -45,6 +46,8 @@
 	even the simplest concepts of other minds. Their alien physiology allows them survive happily off a diet of nothing but light, \
 	water and other radiation."
 
+	brute_mod = 0.6 //Vines are tough.
+	burn_mod = 1.7 //Vines are flammable.
 	grab_mod = 0.6 // Viney Tentacles and shit to cling onto
 	resist_mod = 1.5 // Reasonably stronk, not moreso than an Unathi or robot.
 
