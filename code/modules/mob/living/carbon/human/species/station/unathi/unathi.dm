@@ -63,7 +63,7 @@
 
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/tongue_flick,
-		/mob/living/carbon/human/proc/snakebite
+		/mob/living/carbon/human/proc/komodobite
 	)
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
