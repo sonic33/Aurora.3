@@ -26,6 +26,37 @@
 	damage = 5
 	attack_name = "claws"
 
+/datum/unarmed_attack/bite/komodobite //hisssssss
+	damage_type = PAIN //Due to lore change.
+	attack_verb = list("bit", "chomped on")
+	attack_sound = 'sound/weapons/bite.ogg'
+	shredding = 0
+	sharp = 1
+	edge = 1
+	damage = 5
+	attack_name = "venomous bite"
+
+/datum/unarmed_attack/bite/beastmansharp //eye teeth
+	attack_verb = list("bit", "chomped on")
+	attack_sound = 'sound/weapons/bite.ogg'
+	shredding = 0
+	sharp = 1
+	edge = 1
+	damage = 6
+	attack_name = "sharp bite"
+
+/datum/unarmed_attack/beastmanclaws
+	attack_verb = list("scratched", "clawed", "slashed")
+	attack_noun = list("claws")
+	eye_attack_text = "claws"
+	eye_attack_text_victim = "sharp claws"
+	attack_sound = 'sound/weapons/slice.ogg'
+	miss_sound = 'sound/weapons/slashmiss.ogg'
+	sharp = 1
+	edge = 1
+	damage = 6
+	attack_name = "claws"
+
 /datum/unarmed_attack/claws/show_attack(var/mob/living/carbon/human/user, var/mob/living/carbon/human/target, var/zone, var/attack_damage)
 	var/skill = user.skills["combat"]
 	var/obj/item/organ/external/affecting = target.get_organ(zone)
