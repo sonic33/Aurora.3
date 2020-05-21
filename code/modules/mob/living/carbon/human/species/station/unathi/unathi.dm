@@ -12,7 +12,7 @@
 		/datum/unarmed_attack/stomp,
 		/datum/unarmed_attack/kick,
 		/datum/unarmed_attack/claws,
-		/datum/unarmed_attack/bite/snakebite
+		/datum/unarmed_attack/bite/komodobite //Now 30% more komodo.
 	)
 	primitive_form = "Stok"
 	darksight = 3
@@ -36,8 +36,8 @@
 	stamina = 120 // Unathi have the shortest but fastest sprint of all
 	stamina_recovery = 5
 
-	sprint_cost_factor = 1.45
-	sprint_speed_factor = 3.2
+	sprint_cost_factor = 1.35
+	sprint_speed_factor = 1.8
 	exhaust_threshold = 65
 
 	rarity_value = 3
@@ -65,7 +65,6 @@
 		/mob/living/carbon/human/proc/tongue_flick,
 		/mob/living/carbon/human/proc/snakebite
 	)
-
 
 	spawn_flags = CAN_JOIN | IS_WHITELISTED
 	appearance_flags = HAS_HAIR_COLOR | HAS_LIPS | HAS_UNDERWEAR | HAS_SKIN_COLOR | HAS_EYE_COLOR

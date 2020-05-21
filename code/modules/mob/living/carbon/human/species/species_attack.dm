@@ -26,15 +26,15 @@
 	damage = 5
 	attack_name = "claws"
 
-/datum/unarmed_attack/bite/snakebite //hisssssss
-	damage_type = TOX
+/datum/unarmed_attack/bite/komodobite //hisssssss
+	damage_type = PAIN //Due to lore change.
 	attack_verb = list("bit", "chomped on")
 	attack_sound = 'sound/weapons/bite.ogg'
 	shredding = 0
 	sharp = 1
 	edge = 1
 	damage = 5
-	attack_name = "toxic bite"
+	attack_name = "venomous bite"
 
 /datum/unarmed_attack/bite/beastmansharp //eye teeth
 	attack_verb = list("bit", "chomped on")
