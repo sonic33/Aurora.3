@@ -13,7 +13,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	selection_color = "#4747FF"
 	access = list() 			//See get_access()
 	minimal_access = list() 	//See get_access()
-	minimal_player_age = 14
+	minimal_player_age = 4
 	economic_modifier = 20
 
 	minimum_character_age = 35
@@ -76,7 +76,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	spawn_positions = 1
 	supervisors = "the captain"
 	selection_color = "#9696FF"
-	minimal_player_age = 10
+	minimal_player_age = 2
 	economic_modifier = 10
 	ideal_character_age = 50
 

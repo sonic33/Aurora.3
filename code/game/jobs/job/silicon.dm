@@ -7,7 +7,7 @@
 	spawn_positions = 1
 	selection_color = "#00ff00"
 	supervisors = "your laws"
-	minimal_player_age = 7
+	minimal_player_age = 2
 	account_allowed = 0
 	economic_modifier = 0
 
