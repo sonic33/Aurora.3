@@ -1,5 +1,5 @@
 /datum/species/tajaran
-	name = "Beastman"
+	name = "Tajaran Beastman"
 	short_name = "Beast"
 	name_plural = "Beastmen"
 	bodytype = "Tajara"
@@ -29,7 +29,6 @@
 
 	metabolism_mod = 1.2 // Predator.
 	climb_coeff = 1.15 // Claws.
-	heat_discomfort_level = 305 // Thick Fur
 
 	grab_mod = 1.25 // Fur easy to cling onto
 
@@ -45,10 +44,10 @@
 	sprint_speed_factor = 1.1
 	sprint_cost_factor = 1
 
-	blurb = "The Tajaran race is a species of feline-like bipeds hailing from the planet of Adhomai in the S'rendarr \
+	blurb = "The Beastment race is a species of feline-like bipeds hailing from the planet of Adhomai in the S'rendarr \
 	system. They have been brought up into the space age by the Humans and Skrell, who alledgedly influenced their \
 	eventual revolution that overthrew their ancient monarchies to become totalitarian - and NanoTrasen friendly - \
-	republics. Adhomai is still enduring a global war in the aftermath of the new world order, and many Tajara are \
+	republics. Adhomai is still enduring a global war in the aftermath of the new world order, and many Beastmen are \
 	fleeing their homeworld to seek safety and employment in human space. They prefer colder environments, and speak \
 	a variety of languages, mostly Siik'Maas, using unique inflections their mouths form."
 

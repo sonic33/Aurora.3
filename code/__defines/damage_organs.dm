@@ -69,10 +69,10 @@
 #define INFECTION_LEVEL_THREE 1000
 
 //Blood levels. These are percentages based on the species blood_volume var.
-#define BLOOD_VOLUME_SAFE    85
-#define BLOOD_VOLUME_OKAY    70
-#define BLOOD_VOLUME_BAD     60
-#define BLOOD_VOLUME_SURVIVE 30
+#define BLOOD_VOLUME_SAFE    80
+#define BLOOD_VOLUME_OKAY    65
+#define BLOOD_VOLUME_BAD     55
+#define BLOOD_VOLUME_SURVIVE 25
 
 // These control the amount of blood lost from burns. The loss is calculated so
 // that dealing just enough burn damage to kill the player will cause the given
